@@ -1,14 +1,14 @@
 package eu.atronix.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class RomanNumber{
+public class RomanNumber {
 	//Steps for roman digits
 	static int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
 	//roman digits
     static String[] romanLiterals = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-    static ArrayList<String> romanArrayList = (ArrayList<String>) Arrays.asList(romanLiterals);
+    static List<String> romanArrayList = Arrays.asList(romanLiterals);
     static String[] romanDigits = {"CM","CD","XC","XL","IX","IV","M","D","C","L","X","V","I"};
     static int[] values2 = {900,400,90,40,9,4,1000,500,100,50,10,5,1};
     
@@ -60,29 +60,28 @@ public class RomanNumber{
 		return roman.toString();
     }
     
-    
-	@SuppressWarnings({ "unlikely-arg-type", "null" })
 	public static int convertToInt(String roman) {
     	int value = 0;
     	
     	StringBuilder safeRoman = new StringBuilder();
     	
     	for(int i = 0; i < roman.length(); i++) {
-    		if(romanArrayList.contains(roman.charAt(i))) {
-    			safeRoman.append(roman.charAt(i));
+    		String test = String.valueOf(roman.charAt(i));
+    		if(romanArrayList.contains(test)) {
+    			safeRoman.append(test);
     		} else {
-    			return (Integer) null;
+    			return 0;
     		}
     	}
     	
     	String safedRoman = safeRoman.toString();
+    	System.out.println(safedRoman);
     	
     	for(int j = 0; j < safedRoman.length(); j++) {
 	    	for(int i = 0; i < romanDigits.length; i++) {
-	    		if(safedRoman.contains(romanDigits[i]));
-	    		{
-	    			value =+ values2[i];
-	    			safedRoman.replace(romanDigits[i], "");
+	    		if(safedRoman.contains(romanDigits[i])) {
+	    			value += values2[i];
+	    			safedRoman = safedRoman.replaceFirst(romanDigits[i], "");
 	    		}
 	    	}
     	}
