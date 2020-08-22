@@ -9,8 +9,8 @@ public class RomanNumber {
 	//roman digits
     static String[] romanLiterals = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
     static List<String> romanArrayList = Arrays.asList(romanLiterals);
-    static String[] romanDigits = {"CM","CD","XC","XL","IX","IV","M","D","C","L","X","V","I"};
-    static int[] values2 = {900,400,90,40,9,4,1000,500,100,50,10,5,1};
+    static List<String> romanDigits = Arrays.asList("M","D","C","L","X","V","I");
+    static List<Integer> values2 = Arrays.asList(1000,500,100,50,10,5,1);
     
     /**
      * Converts a number to a roman digit
@@ -77,14 +77,21 @@ public class RomanNumber {
     	String safedRoman = safeRoman.toString();
     	System.out.println(safedRoman);
     	
-    	for(int j = 0; j < safedRoman.length(); j++) {
-	    	for(int i = 0; i < romanDigits.length; i++) {
-	    		if(safedRoman.contains(romanDigits[i])) {
-	    			value += values2[i];
-	    			safedRoman = safedRoman.replaceFirst(romanDigits[i], "");
-	    		}
-	    	}
-    	}
+    	String safedRoman2 = safedRoman.toString();
+    	
+    	for(int j = 0; j - 1 < safedRoman.length(); j++) {
+			char c = safedRoman.charAt(j);
+			char cp = (j + 1 > (safedRoman.toCharArray().length - 1)) ? safedRoman.charAt(j+1) : 9999;
+			int indexJ = romanDigits.indexOf(String.valueOf(c));
+			int indexJp = romanDigits.indexOf(String.valueOf(cp));
+			if(indexJ > indexJp) {
+				value -= values2.get(indexJ);
+				safedRoman = safedRoman.replaceFirst(romanDigits.get(indexJ), "");
+			} else {
+    			value += values2.get(indexJ);
+    			safedRoman = safedRoman.replaceFirst(romanDigits.get(indexJ), "");
+			}
+		}
 		return value;
     }
 }
