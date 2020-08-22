@@ -48,7 +48,7 @@ public class UpperCaseWords{
 	 * <ul>
 	 * <li>This cat is sweet and will get more fish!</li>
 	 * <li>becomes</li>
-	 * <li>This Cat Is Sweet And will Get More Fish!</li>
+	 * <li>This Cat Is Sweet And Will Get More Fish!</li>
 	 * </ul>
 	 * word exceptions can be added by addIgnore(String[] words)
 	 * @author Atronix
