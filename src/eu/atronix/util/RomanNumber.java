@@ -3,14 +3,19 @@ package eu.atronix.util;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Provides some functions for RomanNumbers
+ * <br>such as converting to and from int
+ * @author Atronix
+ * @version 1.0
+ */
 public class RomanNumber {
-	//Steps for roman digits
-	static int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+	//values of roman digits
+	private static int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+	private static List<Integer> values2 = Arrays.asList(1000,500,100,50,10,5,1);
 	//roman digits
-    static String[] romanLiterals = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-    static List<String> romanArrayList = Arrays.asList(romanLiterals);
-    static List<String> romanDigits = Arrays.asList("M","D","C","L","X","V","I");
-    static List<Integer> values2 = Arrays.asList(1000,500,100,50,10,5,1);
+    private static List<String> romanLiterals = Arrays.asList("M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I");
+    private static List<String> romanDigits = Arrays.asList("M","D","C","L","X","V","I");
     
     /**
      * Converts a number to a roman digit
@@ -19,84 +24,99 @@ public class RomanNumber {
      * @return String - Roman Number
      */
     public static String convertToRoman(int num) {
-    	//roman is result-container for roman digits
-    	StringBuilder roman = new StringBuilder();
+    	StringBuilder roman = new StringBuilder(); //roman is result-container for roman digits
     	
-    	//for the whole values array
+    	//as often as the lenth of values array
 	    for(int i = 0; i < values.length; i++) {
 	    	//as long as the num is greater or same as the i of values
 	        while(num >= values[i]) {
-	        	//subtracts used amount
-	            num -= values[i];
-	            //appends converted amount to roman
-	            roman.append(romanLiterals[i]);
+	            num -= values[i]; //subtracts used amount
+	            roman.append(romanLiterals.get(i)); //appends converted amount to roman
 	        }
 	    }
-	    //returns the roman result as String
-		return roman.toString();
+		return roman.toString(); //returns the roman result as String
     }
     
+    
+    
+    
+    
     /**
-     * Converts a number to a roman digit
+     * Converts a number to a roman-digit string
      * @author Atronix
      * @param num Integer - a number which should get converted to Roman number
      * @return String - Roman Number
      */
     public static String convertToRoman(Integer num) {
-    	//roman is result-container for roman digits
-    	StringBuilder roman = new StringBuilder();
+    	StringBuilder roman = new StringBuilder(); //roman is result-container for roman digits
     	
-    	//for the whole values array
+    	//as often as the lenth of values array
 	    for(int i = 0; i < values.length; i++) {
 	    	//as long as the num is greater or same as the i of values
 	        while(num >= values[i]) {
-	        	//subtracts used amount
-	            num -= values[i];
-	          //appends converted amount to roman
-	            roman.append(romanLiterals[i]);
+	            num -= values[i]; //subtracts used amount
+	            roman.append(romanLiterals.get(i)); //appends converted amount to roman
 	        }
 	    }
-	    //returns the roman result as String
-		return roman.toString();
+		return roman.toString(); //returns the roman result as String
     }
     
+    
+    
+    
+    
+    /**
+     * Converts a roman-digit string to an int
+     * @author Atronix
+     * @param roman String - the string which contains roman digits
+     * @return Int - the value of the roman 
+     */
 	public static int convertToInt(String roman) {
-    	int value = 0;
+    	int value = 0; //value is the finish value of the roman string it begins at 0
+    	StringBuilder safeRoman = new StringBuilder(); //safeRoman is a container for checking the roman on faults
     	
-    	StringBuilder safeRoman = new StringBuilder();
-    	
+    	//as often as the amount of chars in roman
     	for(int i = 0; i < roman.length(); i++) {
-    		String test = String.valueOf(roman.charAt(i));
-    		if(romanArrayList.contains(test)) {
-    			safeRoman.append(test);
+    		String s = String.valueOf(roman.charAt(i)); //s is a container for an single char, cause we have an String List we need a string
+    		
+    		/* if the list of roman digits contains the given character
+    		 * checks that to be sure its a known roman digit
+    		 */
+    		if(romanLiterals.contains(s)) {
+    			safeRoman.append(s); //given character will be appended to the safeRoman
     		} else {
-    			return 0;
+    			System.out.println("[RomanNumber.convertToInt()] Invalid Roman"); //Errormessage
+    			return 0; //returns no value
     		}
     	}
     	
-    	String safedRoman = safeRoman.toString();
-    	System.out.println(safedRoman);
+    	String safedRoman = safeRoman.toString(); //safedRoman is the finished safeRoman
+		int cArrL = safedRoman.length(); //cArrL is the amount of chars in safedRoman
     	
-    	for(int j = 0; j < safedRoman.length(); j++) {
-    		int indexJ;
-    		int indexJp;
-    		int cArrL = safedRoman.length();
+		//as often as the amount of chars in safedRoman
+    	for(int j = 0; j < cArrL; j++) {
+    		int indexJ; //indexJ is the index of the given character in the romandDigits list 
+    		int indexJp; //indexJp is the index given character +1 in the romandDigits list
+    		
+    		/* if the current turn + 2 is greater than the length of safedRoman
+    		 * must be + cause the length is already + 1 than the highest index
+    		 */
     		if(j + 2 > cArrL) {
-    			char c = safedRoman.charAt(j);
-    			indexJ = romanDigits.indexOf(String.valueOf(c));
-    			indexJp = 9999;
+    			char c = safedRoman.charAt(j); //c is the given char
+    			indexJ = romanDigits.indexOf(String.valueOf(c)); //initializes indexJ
+    			indexJp = 9999; //initializes indexJp
     		} else {
-    			char c = safedRoman.charAt(j);
-    			char cp = safedRoman.charAt(j + 1);
-    			indexJ = romanDigits.indexOf(String.valueOf(c));
-    			indexJp = romanDigits.indexOf(String.valueOf(cp));
+    			char c = safedRoman.charAt(j); //c is the given char
+    			char cp = safedRoman.charAt(j + 1); //cp is the given char +1
+    			indexJ = romanDigits.indexOf(String.valueOf(c)); //initializes indexJ
+    			indexJp = romanDigits.indexOf(String.valueOf(cp)); //initializes indexJp
     		}
+    		
+    		//if the indexJ ist greater than the indexJp
 			if(indexJ > indexJp) {
-				value -= values2.get(indexJ);
-				safedRoman = safedRoman.replaceFirst(romanDigits.get(indexJ), "");
+				value -= values2.get(indexJ); //subtracts the value of the given char from current value
 			} else {
-    			value += values2.get(indexJ);
-    			safedRoman = safedRoman.replaceFirst(romanDigits.get(indexJ), "");
+    			value += values2.get(indexJ); //adds the value of the given char to current value
 			}
 		}
 		return value;
