@@ -9,7 +9,21 @@ import java.nio.file.StandardOpenOption;
 
 import org.json.JSONObject;
 
+/**
+ * Needs original org.json package to work
+ * <br>provides several functions to interact with json files
+ * @author Atronix
+ * @version 1.0
+ *
+ */
 public class JSONFile {
+	/*
+	 * IDEAS:
+	 * creating functions for objects of JSONFile like blablaFile.readJson()
+	 */
+	
+	
+	
 	/**
 	 * Reads the JsonFile of it's input and converts it to JSONObj
 	 * @author Atronix
@@ -43,6 +57,10 @@ public class JSONFile {
 		
 		return Obj;
 	}
+	
+	
+	
+	
 	
 	/**
 	 * Writes JSONObject into File by getting the File and the JsonObject as input
