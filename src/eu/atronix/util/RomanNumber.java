@@ -77,13 +77,20 @@ public class RomanNumber {
     	String safedRoman = safeRoman.toString();
     	System.out.println(safedRoman);
     	
-    	String safedRoman2 = safedRoman.toString();
-    	
-    	for(int j = 0; j - 1 < safedRoman.length(); j++) {
-			char c = safedRoman.charAt(j);
-			char cp = (j + 1 > (safedRoman.toCharArray().length - 1)) ? safedRoman.charAt(j+1) : 9999;
-			int indexJ = romanDigits.indexOf(String.valueOf(c));
-			int indexJp = romanDigits.indexOf(String.valueOf(cp));
+    	for(int j = 0; j < safedRoman.length(); j++) {
+    		int indexJ;
+    		int indexJp;
+    		int cArrL = safedRoman.length();
+    		if(j + 2 > cArrL) {
+    			char c = safedRoman.charAt(j);
+    			indexJ = romanDigits.indexOf(String.valueOf(c));
+    			indexJp = 9999;
+    		} else {
+    			char c = safedRoman.charAt(j);
+    			char cp = safedRoman.charAt(j + 1);
+    			indexJ = romanDigits.indexOf(String.valueOf(c));
+    			indexJp = romanDigits.indexOf(String.valueOf(cp));
+    		}
 			if(indexJ > indexJp) {
 				value -= values2.get(indexJ);
 				safedRoman = safedRoman.replaceFirst(romanDigits.get(indexJ), "");
