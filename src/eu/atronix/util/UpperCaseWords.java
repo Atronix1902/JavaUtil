@@ -3,11 +3,19 @@ package eu.atronix.util;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Provides some functions for Words
+ * <br>such as setting the first letter of every word to uppercase
+ * @author Atronix
+ * @version 1.0
+ *
+ */
 public class UpperCaseWords{
 	
 	//List of words to ignore
 	private static List<String> ignore = Arrays.asList(
-			/*"in",
+			/*
+			"in",
 			"am",
 			"an",
 			"der",
@@ -25,22 +33,42 @@ public class UpperCaseWords{
 			"was",
 			"be",
 			"am",
-			"were"*/
+			"were"
+			*/
 	);
 	
 	/**
 	 * Adds words to Ignore list
 	 * @author Atronix
-	 * @param words String Array - word which should be added to ignore-list
+	 * @param words String Array - word/s that should be added to ignore-list
 	 * @return void
 	 */
 	public static void addIgnore(String[] words) {
 		//for every word in words
 		for (String word : words) {
-			//adds word to ignore
-			ignore.add(word);
+			ignore.add(word); //adds word to ignore
 		}
 	}
+	
+	
+	
+	
+	/**
+	 * Removes words from Ignore list
+	 * @author Atronix
+	 * @param words String Array - word/s that should be removed from ignore-list
+	 * @return void
+	 */
+	public static void remIgnore(String[] words) {
+		//for every word in words
+		for (String word : words) {
+			ignore.remove(word); //removes word from ignore
+		}
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Sets first letter of every word to uppercase 
@@ -61,40 +89,31 @@ public class UpperCaseWords{
 			return null;
 		}
 
-		//trims the given string and set it to lowercase
-		String str = sentence.trim().toLowerCase();
-
-		//split in words
-		String[] words = str.split("\\s");
-
-		//container for result
-		StringBuilder result = new StringBuilder();
+		String str = sentence.trim().toLowerCase(); //trims the given string and set it to lowercase
+		String[] words = str.split("\\s"); //split in words
+		StringBuilder result = new StringBuilder(); //container for result
 
 		//for every word of original string
 		for (String word : words) {
-			//ignores given words
+			//ignores given words if its on ignore list
 			if(ignore.contains(word)) {
 				result.append(word);
 			} else {
-				//sets first char of every word to uppercase and appends it to result
-				result.append(Character.toUpperCase(word.charAt(0)));
+				result.append(Character.toUpperCase(word.charAt(0))); //sets first char of every word to uppercase and appends it to result
 
 				//append remaining chars if existing
 				if (word.length() > 1) {
 					result.append(word.substring(1));
 				}
 			}
-
-			//append space after word
-			result.append(' ');
+			result.append(' '); //append space after word
 		}
 
-		//removes the last unused space 
+		//removes the last unused space if the length is greater than 0 
 		if (result.length() > 0) {
 			result.setLength(result.length() - 1);
 		}
 
-		//return result as String
-		return result.toString();
+		return result.toString(); //return result as String
 	}
 }
