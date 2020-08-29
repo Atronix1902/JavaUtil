@@ -12,8 +12,7 @@ import java.util.List;
  */
 public class UpperCaseWords{
 	
-	//List of words to ignore
-	private static List<String> ignore = Arrays.asList(
+	private static List<String> ignore = Arrays.asList( //List of words to ignore
 			/*
 			"in",
 			"am",
@@ -36,6 +35,23 @@ public class UpperCaseWords{
 			"were"
 			*/
 	);
+	
+	
+	
+	
+	
+	/**
+	 * Returns the current ignores as List
+	 * @author Atronix
+	 * @return String-List
+	 */
+	public static List<String> getIgnore() {
+		return ignore;
+	}
+	
+	
+	
+	
 	
 	/**
 	 * Adds words to Ignore list

@@ -10,6 +10,9 @@ import java.util.List;
  * @version 1.0
  */
 public class RomanNumber {
+	private int iValue = 0; //value of instance of Object
+	private String romanValue = ""; //value of instance of Object as roman
+	
 	//values of roman digits
 	private static int[] values = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
 	private static List<Integer> values2 = Arrays.asList(1000,500,100,50,10,5,1);
@@ -121,4 +124,86 @@ public class RomanNumber {
 		}
 		return value;
     }
+	
+	
+	
+	
+	/**
+	 * Constructs a RomanNumber Object with given value
+	 * @type Constructor
+	 * @author Atronix
+	 * @param iValue int - the value the RomanNumber should contain
+	 */
+	public RomanNumber(int iValue) {
+		this.romanValue = convertToRoman(iValue);
+		this.iValue = iValue;
+	}
+	
+	/**
+	 * Constructs a RomanNumber Object with given roman value
+	 * @type Constructor
+	 * @author Atronix
+	 * @param romanValue String - the value the RomanNumber should contain as roman
+	 */
+	public RomanNumber(String romanValue) {
+		this.romanValue = romanValue;
+		this.iValue = convertToInt(romanValue);
+	}
+	
+	/**
+	 * Constructs a RomanNumber Object with standard value 0
+	 * @type Constructor
+	 * @author Atronix
+	 */
+	public RomanNumber() {
+		this(0);
+	}
+	
+	
+	
+	
+	/**
+	 * Sets the value of this object as decimal int
+	 * @author Atronix
+	 * @param iValue int - the value this object should contain
+	 */
+	public void setValue(int iValue) {
+		this.iValue = iValue;
+		this.romanValue = convertToRoman(iValue);
+	}
+	
+	
+	
+	
+	/**
+	 * Gets the value of this object as int
+	 * @author Atronix
+	 * @return int - value this object contains
+	 */
+	public int getValue() {
+		return this.iValue;
+	}
+	
+	
+	
+	
+	/**
+	 * Sets the roman-value of this object as String
+	 * @author Atronix
+	 * @param romanValue String - the value this object should contain as roman
+	 */
+	public void setRoman(String romanValue) {
+		this.romanValue = romanValue;
+		this.iValue = convertToInt(romanValue);
+	}
+	
+	
+	
+	/**
+	 * Gets the roman-value of this object as String
+	 * @author Atronix
+	 */
+	public String getRoman() {
+		return this.romanValue;
+	}
 }
