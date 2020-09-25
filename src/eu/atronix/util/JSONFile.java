@@ -25,7 +25,36 @@ public class JSONFile {
 	private String path = ""; //Path of the File
 	private String content = ""; //Content of the File
 	
+	public JSONFile(String path) {
+		this.path = path;
+	}
 	
+	public JSONObject read() {
+		File file = new File(path);
+		
+		JSONObject Obj  = new JSONObject(); //Object to save the finished 
+		
+		try {
+			String line = ""; //Single line of file
+			content = ""; //Complete file content as String
+			
+			BufferedReader br = Files.newBufferedReader(file.toPath()); //reader for reading the file
+			
+			//as long there is still a char left
+			while((line = br.readLine())!=null) {	
+				content += line; //appending the current line 
+			}
+			
+			br.close(); //closes the connection to file
+			
+			Obj = new JSONObject(content.trim()); //initialises Obj with content of complete file
+			
+		} catch (Exception e) {
+		e.printStackTrace(); //prints error if error occurs
+		}
+		
+		return Obj; //returns finished Object
+	}
 	
 	/**
 	 * Reads the JsonFile of it's input and converts it to JSONObj
